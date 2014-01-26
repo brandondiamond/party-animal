@@ -9,6 +9,7 @@
 #import "SidebarController1.h"
 #import "SidebarCell1.h"
 #import "FlatTheme.h"
+#import "FBSession.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface SidebarController1 ()
@@ -24,16 +25,16 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
     }
     return self;
 }
-- (IBAction)transitionToProfile:(UITapGestureRecognizer *)sender {
-}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
@@ -52,17 +53,19 @@
     self.profileLocationLabel.font = [UIFont fontWithName:fontName size:12.0f];
     self.profileLocationLabel.text = @"London, UK";
     
+  
+    
     self.profileImageView.image = [UIImage imageNamed:@"profile.jpg"];
     self.profileImageView.clipsToBounds = YES;
     self.profileImageView.layer.borderWidth = 4.0f;
     self.profileImageView.layer.borderColor = [UIColor colorWithWhite:1.0f alpha:0.5f].CGColor;
     self.profileImageView.layer.cornerRadius = 35.0f;
-    
-    NSDictionary* object1 = [NSDictionary dictionaryWithObjects:@[ @"Inbox", @"7", @"envelope"] forKeys:@[ @"title", @"count", @"icon" ]];
-    NSDictionary* object2 = [NSDictionary dictionaryWithObjects:@[ @"Updates", @"7", @"check"] forKeys:@[ @"title", @"count", @"icon"]];
-    NSDictionary* object3 = [NSDictionary dictionaryWithObjects:@[ @"Account", @"0", @"account"] forKeys:@[ @"title", @"count", @"icon" ]];
-    NSDictionary* object4 = [NSDictionary dictionaryWithObjects:@[ @"Settings", @"0", @"settings"] forKeys:@[ @"title", @"count", @"icon"]];
-    NSDictionary* object5 = [NSDictionary dictionaryWithObjects:@[ @"Logout", @"0", @"arrow"] forKeys:@[ @"title", @"count", @"icon"]];
+
+    NSDictionary* object1 = [NSDictionary dictionaryWithObjects:@[ @"Feed", @"7", @"arrow"] forKeys:@[ @"title", @"count", @"icon" ]];
+    NSDictionary* object2 = [NSDictionary dictionaryWithObjects:@[ @"Inbox", @"7", @"envelope"] forKeys:@[ @"title", @"count", @"icon" ]];
+    NSDictionary* object3 = [NSDictionary dictionaryWithObjects:@[ @"Updates", @"7", @"check"] forKeys:@[ @"title", @"count", @"icon"]];
+    NSDictionary* object4 = [NSDictionary dictionaryWithObjects:@[ @"Account", @"0", @"account"] forKeys:@[ @"title", @"count", @"icon" ]];
+    NSDictionary* object5 = [NSDictionary dictionaryWithObjects:@[ @"Settings", @"0", @"settings"] forKeys:@[ @"title", @"count", @"icon"]];
     
     self.items = @[object1, object2, object3, object4, object5];
 	
@@ -71,13 +74,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 4;
+    return self.items.count;
 }
 
 -(UITapGestureRecognizer*)getGestureRecognizerFor:(NSString *)title{
     UITapGestureRecognizer *tapGesture;
-    
-    if([title isEqualToString:@"Inbox"])
+
+    if([title isEqualToString:@"Feed"])
+        tapGesture = [[UITapGestureRecognizer alloc]
+                      initWithTarget:self action:@selector(viewFeed:)];
+    else if([title isEqualToString:@"Inbox"])
         tapGesture = [[UITapGestureRecognizer alloc]
                       initWithTarget:self action:@selector(viewProfile:)];
     else if([title isEqualToString:@"Updates"])
@@ -92,6 +98,7 @@
     else if([title isEqualToString:@"Logout"])
         tapGesture = [[UITapGestureRecognizer alloc]
                       initWithTarget:self action:@selector(viewProfile:)];
+    
     
     return tapGesture;
 }
@@ -135,6 +142,20 @@
     [self.mainSideViewController toggleSidebar:!self.mainSideViewController.sidebarShowing duration:kGHRevealSidebarDefaultAnimationDuration];
 }
 
+-(void)viewFeed:(UIGestureRecognizer *)gestureRecognizer{
+    
+    NSLog(@"view profile");
+    UIStoryboard* feedStoryboard = [UIStoryboard storyboardWithName:@"FeedStoryboard" bundle:nil];
+    UIViewController *feedVC = [feedStoryboard instantiateViewControllerWithIdentifier:@"FeedController"];
+    
+    feedVC.navigationItem.leftBarButtonItem = self.mainSideViewController.menuItem;
+    
+    [(UINavigationController*)self.mainSideViewController.contentViewController setViewControllers:[NSArray arrayWithObject:feedVC] animated:YES];
+    
+    [self.mainSideViewController toggleSidebar:!self.mainSideViewController.sidebarShowing duration:kGHRevealSidebarDefaultAnimationDuration];
+}
+
+
 -(void)viewSettings:(UIGestureRecognizer *)gestureRecognizer{
     
     NSLog(@"view profile");
@@ -154,14 +175,21 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSLog(@"seguing");
-    if ([segue.identifier isEqualToString:@"ProfileSegue"]) {
+    
+    if ([segue.identifier isEqualToString:@"ProfileSegue"]){
+        
+        NSLog(@"seguing to profile");
         
         UIStoryboard* feedStoryboard = [UIStoryboard storyboardWithName:@"LoginStoryboard" bundle:nil];
         UIViewController *profileVC = [feedStoryboard instantiateViewControllerWithIdentifier:@"ProfileController"];
         
         [segue.destinationViewController setContentViewController:profileVC];
     }
+    else if ([segue.identifier isEqualToString:@"LogoutSegue"]){
+        NSLog(@"Logging out");
+        [FBSession.activeSession closeAndClearTokenInformation];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning

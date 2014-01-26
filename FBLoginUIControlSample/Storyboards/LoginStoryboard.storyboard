@@ -210,11 +210,22 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fmG-sJ-ie3">
+                                <rect key="frame" x="93" y="72" width="49" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="yHH-IY-hve" kind="modal" identifier="LogoutSegue" id="zxv-Bx-1Xr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                     </view>
                     <connections>
+                        <outlet property="logoutLink" destination="fmG-sJ-ie3" id="MAq-Lf-rit"/>
                         <outlet property="profileImageView" destination="pXN-G5-NZ9" id="gwj-J7-C9R"/>
                         <outlet property="profileLocationLabel" destination="kZA-z0-cXH" id="Ovw-lo-IyV"/>
                         <outlet property="profileNameLabel" destination="0ua-bb-j5R" id="Tal-x6-oBV"/>
@@ -417,4 +428,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="zxv-Bx-1Xr"/>
+    </inferredMetricsTieBreakers>
 </document>

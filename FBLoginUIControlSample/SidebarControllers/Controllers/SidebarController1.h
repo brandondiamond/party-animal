@@ -19,6 +19,10 @@
 
 @property (nonatomic, weak) IBOutlet UIImageView* profileImageView;
 
+@property (weak, nonatomic) IBOutlet UIButton *logoutLink;
+
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *logoutGestureRecognizer;
+
 @property (nonatomic, weak) MainSideViewController* mainSideViewController;
 
 @end
