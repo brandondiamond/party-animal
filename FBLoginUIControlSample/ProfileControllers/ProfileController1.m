@@ -32,7 +32,7 @@
     
     NSString* fontName = @"GillSans-Italic";
     NSString* boldFontName = @"GillSans-Bold";
-    
+    self.title = @"Profile";
     self.nameLabel.textColor =  [UIColor whiteColor];
     self.nameLabel.font =  [UIFont fontWithName:boldFontName size:18.0f];
     self.nameLabel.text = @"Maria Llewellyngot";

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MainSideViewController.h"
 
 @interface SidebarController1 : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
@@ -17,5 +18,7 @@
 @property (nonatomic, weak) IBOutlet UILabel* profileLocationLabel;
 
 @property (nonatomic, weak) IBOutlet UIImageView* profileImageView;
+
+@property (nonatomic, weak) MainSideViewController* mainSideViewController;
 
 @end

@@ -12,5 +12,5 @@
 @interface MainSideViewController : GHRevealViewController
 
 @property (nonatomic, strong) NSString* controllerId;
-
+@property (nonatomic, strong)UIBarButtonItem* menuItem;
 @end

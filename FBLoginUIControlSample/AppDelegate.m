@@ -28,7 +28,7 @@
 //    LoginUIViewController *loginUIViewController = [[LoginUIViewController alloc] init];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LoginStoryboard" bundle:nil];
-    UIViewController* initialViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginController3"];
+    UIViewController* initialViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginController"];
     
     // Set loginUIViewController as root view controller
     [[self window] setRootViewController:initialViewController];

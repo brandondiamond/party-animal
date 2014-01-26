@@ -97,7 +97,6 @@ const CGFloat kGHRevealSidebarFlickVelocity = 1000.0f;
 		self.searching = NO;
 		_tapRecog = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideSidebar)];
 		_tapRecog.cancelsTouchesInView = YES;
-		
 		self.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 		
 		_sidebarView = [[UIView alloc] initWithFrame:self.view.bounds];

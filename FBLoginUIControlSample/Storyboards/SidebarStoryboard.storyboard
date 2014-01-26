@@ -96,6 +96,10 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" id="ZwG-xV-Qqf">
                                 <rect key="frame" x="20" y="12" width="65" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Btj-SC-OpP" appends="YES" id="ZKS-9A-fgP"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="n7F-DH-t61">
                                 <rect key="frame" x="93" y="29" width="176" height="21"/>
@@ -122,8 +126,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F2l-nh-4si" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Btj-SC-OpP"/>
             </objects>
-            <point key="canvasLocation" x="565" y="37"/>
+            <point key="canvasLocation" x="591" y="23"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

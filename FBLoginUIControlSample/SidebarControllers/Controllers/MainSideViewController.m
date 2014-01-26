@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 App Design Vault. All rights reserved.
 //
 
-#import "FeedController3.h"
+#import "FeedController.h"
 #import "MainSideViewController.h"
 #import "SidebarController1.h"
 #import "FlatTheme.h"
@@ -30,18 +30,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SidebarStoryboard" bundle:nil];
-    UIViewController *rearVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"SidebarController1"];
+    UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"LoginStoryboard" bundle:nil];
+    SidebarController1 *rearVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"SidebarController"];
 
-    UINavigationController *frontVC =     [[UIStoryboard storyboardWithName:@"FeedStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"FeedController3"];
+    UIStoryboard* feedStoryboard = [UIStoryboard storyboardWithName:@"FeedStoryboard" bundle:nil];
+    UIViewController *frontVC = [feedStoryboard instantiateViewControllerWithIdentifier:@"FeedController"];
     
-    UIViewController* frontController = frontVC;
-    //UIViewController* frontController = [[UIViewController alloc] init];
+    frontVC.view.backgroundColor = [UIColor blackColor];
 
-    frontController.view.backgroundColor = [UIColor blackColor];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:frontVC];
     
-    UINavigationController *nav = frontVC;
-    //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:frontController];
     
     [FlatTheme styleNavigationBarWithFontName:@"Avenir" andColor:[UIColor colorWithWhite:0.4f alpha:1.0f]];
     
@@ -49,10 +47,12 @@
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu.png"] forState:UIControlStateNormal];
     [menuButton addTarget:self action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIBarButtonItem* menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    self.menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
 
-    frontController.navigationItem.leftBarButtonItem = menuItem;
 
+    frontVC.navigationItem.leftBarButtonItem = self.menuItem;
+    rearVC.mainSideViewController = self;
+    
     self.contentViewController = nav;
     self.sidebarViewController = rearVC;
 }
@@ -66,6 +66,8 @@
     
     self.title = self.contentViewController.title;
 }
+
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

@@ -33,9 +33,13 @@
 // Implement the loginViewShowingLoggedInUser: delegate method to modify your app's UI for a logged-in user experience
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
 
-    NSLog(@"asdf2");    
+    NSLog(@"Logged in. Transitioning to sidebar storyboard.");
+//    UIStoryboard* feedStoryboard = [UIStoryboard storyboardWithName:@"LoginStoryboard" bundle:nil];
+//    UIViewController *frontVC = [feedStoryboard instantiateViewControllerWithIdentifier:@"MainSideViewController"];
+//
+//    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+//    window.rootViewController = frontVC;
     [self performSegueWithIdentifier:@"SidebarSegue" sender:self];
-    
 }
 
 // This method will be called when the user information has been fetched
@@ -90,7 +94,7 @@
 
 - (void)viewDidLoad
 {
-    NSLog(@"asdf1");
+
     [super viewDidLoad];
 
     UIColor* mainColor = [UIColor colorWithRed:28.0/255 green:158.0/255 blue:121.0/255 alpha:1.0f];
@@ -162,11 +166,10 @@
     
     // Align the button in the center horizontally
     loginView.frame = CGRectOffset(loginView.frame,
-                                   (self.view.center.x - (loginView.frame.size.width / 2)),
-                                   5);
+                                   (self.view.center.x - (loginView.frame.size.width / 2)), 130);
     
-    // Align the button in the center vertically
-    loginView.center = self.view.center;
+
+
     [self.view addSubview:loginView];
 
 }
