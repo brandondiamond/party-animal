@@ -59,6 +59,7 @@ typedef enum {
  */
 @property (nonatomic) FBProfilePictureCropping pictureCropping;
 
+@property (copy, nonatomic) NSData *data;
 /*!
  @abstract
  Initializes and returns a profile view object.
@@ -76,5 +77,7 @@ typedef enum {
 - (id)initWithProfileID:(NSString*)profileID
      pictureCropping:(FBProfilePictureCropping)pictureCropping;
 
+- (NSString *)imageQueryParamString;
+- (void)ensureImageViewContentMode;
 
 @end

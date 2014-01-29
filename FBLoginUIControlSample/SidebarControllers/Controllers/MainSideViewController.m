@@ -22,7 +22,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.controllerId = @"SidebarController1";
+        self.controllerId = @"FeedController";
     }
     return self;
 }

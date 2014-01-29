@@ -6,16 +6,20 @@
 //  Copyright (c) 2013 App Design Vault. All rights reserved.
 //
 
+#import "User.h"
 #import "SidebarController1.h"
 #import "SidebarCell1.h"
 #import "FlatTheme.h"
-#import "FBSession.h"
+#import <FacebookSDK/FacebookSDK.h>
+#import "FBURLConnection.h"
+#import "FBUtility.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface SidebarController1 ()
 
 @property (nonatomic, strong) NSArray* items;
-
+@property (weak, atomic) User* current_user;
+@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 @end
 
 @implementation SidebarController1
@@ -23,9 +27,11 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+
     if (self) {
         // Custom initialization
         
+       
     }
     return self;
 }
@@ -34,7 +40,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    self.current_user = [User currentUser];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
@@ -47,19 +54,25 @@
     
     self.profileNameLabel.textColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
     self.profileNameLabel.font = [UIFont fontWithName:boldFontName size:14.0f];
-    self.profileNameLabel.text = @"Lena Leamington";
+    self.profileNameLabel.text = [[User currentUser] name];
+    
     
     self.profileLocationLabel.textColor = [UIColor colorWithRed:222.0/255 green:59.0/255 blue:47.0/255 alpha:1.0f];
     self.profileLocationLabel.font = [UIFont fontWithName:fontName size:12.0f];
     self.profileLocationLabel.text = @"London, UK";
     
+    self.logoutLink.font = [UIFont fontWithName:fontName size:12.0f];
   
     
-    self.profileImageView.image = [UIImage imageNamed:@"profile.jpg"];
+    self.profileImageView.image = self.current_user.profile_picture;
+    
     self.profileImageView.clipsToBounds = YES;
-    self.profileImageView.layer.borderWidth = 4.0f;
+    self.profileImageView.layer.borderWidth = 2.0f;
     self.profileImageView.layer.borderColor = [UIColor colorWithWhite:1.0f alpha:0.5f].CGColor;
-    self.profileImageView.layer.cornerRadius = 35.0f;
+    self.profileImageView.layer.cornerRadius = 10.0f;
+    
+    [self setRoundedView:self.profileImageView toDiameter:50];
+    
 
     NSDictionary* object1 = [NSDictionary dictionaryWithObjects:@[ @"Feed", @"7", @"arrow"] forKeys:@[ @"title", @"count", @"icon" ]];
     NSDictionary* object2 = [NSDictionary dictionaryWithObjects:@[ @"Inbox", @"7", @"envelope"] forKeys:@[ @"title", @"count", @"icon" ]];
@@ -71,6 +84,14 @@
 	
 }
 
+-(void)setRoundedView:(UIImageView *)roundedView toDiameter:(float)newSize;
+{
+    CGPoint saveCenter = roundedView.center;
+    CGRect newFrame = CGRectMake(roundedView.frame.origin.x, roundedView.frame.origin.y, newSize, newSize);
+    roundedView.frame = newFrame;
+    roundedView.layer.cornerRadius = newSize / 2.0;
+    roundedView.center = saveCenter;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -132,8 +153,8 @@
 -(void)viewProfile:(UIGestureRecognizer *)gestureRecognizer{
     
     NSLog(@"view profile");
-    UIStoryboard* feedStoryboard = [UIStoryboard storyboardWithName:@"LoginStoryboard" bundle:nil];
-    UIViewController *profileVC = [feedStoryboard instantiateViewControllerWithIdentifier:@"ProfileController"];
+    UIStoryboard* profileStoryboard = [UIStoryboard storyboardWithName:@"LoginStoryboard" bundle:nil];
+    UIViewController *profileVC = [profileStoryboard instantiateViewControllerWithIdentifier:@"ProfileController"];
     
     profileVC.navigationItem.leftBarButtonItem = self.mainSideViewController.menuItem;
     
@@ -144,26 +165,26 @@
 
 -(void)viewFeed:(UIGestureRecognizer *)gestureRecognizer{
     
-    NSLog(@"view profile");
+    NSLog(@"view feed");
     UIStoryboard* feedStoryboard = [UIStoryboard storyboardWithName:@"FeedStoryboard" bundle:nil];
     UIViewController *feedVC = [feedStoryboard instantiateViewControllerWithIdentifier:@"FeedController"];
     
+    feedVC.view.backgroundColor = [UIColor blackColor];
     feedVC.navigationItem.leftBarButtonItem = self.mainSideViewController.menuItem;
     
     [(UINavigationController*)self.mainSideViewController.contentViewController setViewControllers:[NSArray arrayWithObject:feedVC] animated:YES];
     
     [self.mainSideViewController toggleSidebar:!self.mainSideViewController.sidebarShowing duration:kGHRevealSidebarDefaultAnimationDuration];
+
 }
 
 
 -(void)viewSettings:(UIGestureRecognizer *)gestureRecognizer{
     
-    NSLog(@"view profile");
+    NSLog(@"view settings");
     UIStoryboard* feedStoryboard = [UIStoryboard storyboardWithName:@"SettingsStoryboard" bundle:nil];
     UIViewController *profileVC = [feedStoryboard instantiateViewControllerWithIdentifier:@"SettingsController"];
-    
-    [FlatTheme styleNavigationBarWithFontName:@"Avenir" andColor:[UIColor colorWithWhite:0.4f alpha:1.0f]];
-    
+        
     profileVC.navigationItem.leftBarButtonItem = self.mainSideViewController.menuItem;
     
     [(UINavigationController*)self.mainSideViewController.contentViewController setViewControllers:[NSArray arrayWithObject:profileVC] animated:YES];

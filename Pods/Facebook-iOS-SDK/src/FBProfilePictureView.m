@@ -27,9 +27,8 @@
 
 @property (readonly, nonatomic) NSString *imageQueryParamString;
 @property (retain, nonatomic) NSString *previousImageQueryParamString;
-
-@property (retain, nonatomic) FBURLConnection *connection;
 @property (retain, nonatomic) UIImageView *imageView;
+@property (retain, nonatomic) FBURLConnection *connection;
 
 - (void)initialize;
 - (void)refreshImage:(BOOL)forceRefresh;
@@ -130,11 +129,10 @@
     if (self.imageView) {
         return;
     }
-
+    
     UIImageView* imageView = [[[UIImageView alloc] initWithFrame:self.bounds] autorelease];
     imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.imageView = imageView;
-
     self.autoresizesSubviews = YES;
     self.clipsToBounds = YES;
 
@@ -163,8 +161,9 @@
                 FBConditionalLog(self.connection == connection, @"Inconsistent connection state");
 
                 self.connection = nil;
+                self.data = data;
                 if (!error) {
-                    self.imageView.image = [UIImage imageWithData:data];
+                    self.data = data;
                     [self ensureImageViewContentMode];
                 }
             };
@@ -234,7 +233,7 @@
 }
 
 - (CGSize)intrinsicContentSize {
-    return self.bounds.size;
+    return CGSizeMake(65, 65);
 }
 
 @end

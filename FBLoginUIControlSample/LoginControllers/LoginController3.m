@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 App Design Vault. All rights reserved.
 //
 
+#import "User.h"
 #import "LoginController3.h"
 #import "MainSideViewController.h"
 #import <QuartzCore/QuartzCore.h>
@@ -33,19 +34,20 @@
 // Implement the loginViewShowingLoggedInUser: delegate method to modify your app's UI for a logged-in user experience
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
 
-    NSLog(@"Logged in. Transitioning to sidebar storyboard.");
-//    UIStoryboard* feedStoryboard = [UIStoryboard storyboardWithName:@"LoginStoryboard" bundle:nil];
-//    UIViewController *frontVC = [feedStoryboard instantiateViewControllerWithIdentifier:@"MainSideViewController"];
-//
-//    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-//    window.rootViewController = frontVC;
-    [self performSegueWithIdentifier:@"SidebarSegue" sender:self];
 }
 
 // This method will be called when the user information has been fetched
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
                             user:(id<FBGraphUser>)user {
-    NSLog(@"asdf3");
+    NSArray *arr= [[NSArray alloc]initWithObjects:user.first_name, user.middle_name, user.last_name, nil];
+    NSString *name = [arr componentsJoinedByString:@" "];
+    
+    [[User currentUser] setId:user.id name:name link:user.link username:user.username birthday:user.birthday location:user.location];
+    NSLog(@"Initialized current user");
+    
+    NSLog(@"Transitioning to sidebar storyboard.");
+    [self performSegueWithIdentifier:@"SidebarSegue" sender:self];
+    
 }
 
 
