@@ -235,24 +235,20 @@
 		0E0DE60D1891110D000C6B65 /* FBLoginUIControlSample */ = {
 			isa = PBXGroup;
 			children = (
+				0E960F66189BA997009AD48C /* Controllers */,
 				0EBE722218962D8800572DE7 /* Models */,
 				0E0DE60E1891110D000C6B65 /* AppDelegate.h */,
 				0E0DE60F1891110D000C6B65 /* AppDelegate.m */,
 				0E0DE6121891110D000C6B65 /* FeedControllers */,
 				0E0DE6191891110D000C6B65 /* Images.xcassets */,
 				0E0DE61A1891110D000C6B65 /* Library */,
-				0E0DE62F1891110D000C6B65 /* LoginControllers */,
 				0E0DE6361891110D000C6B65 /* LoginUIViewController.h */,
 				0E0DE6371891110D000C6B65 /* LoginUIViewController.m */,
 				0E0DE6381891110D000C6B65 /* LoginUIViewController.xib */,
 				0E0DE6391891110D000C6B65 /* main.m */,
-				0E0DE63A1891110D000C6B65 /* MainController */,
 				0E0DE6401891110D000C6B65 /* PartyAnimal-Info.plist */,
 				0E0DE6411891110D000C6B65 /* PartyAnimal-Prefix.pch */,
-				0E0DE6421891110D000C6B65 /* ProfileControllers */,
 				0E0DE6451891110D000C6B65 /* Resources */,
-				0E0DE6671891110D000C6B65 /* SettingsControllers */,
-				0E0DE66B1891110D000C6B65 /* SidebarControllers */,
 				0E0DE6741891110D000C6B65 /* Storyboards */,
 				0E0DE67A1891110D000C6B65 /* Utils */,
 			);
@@ -493,6 +489,18 @@
 				0E0DE6821891110D000C6B65 /* Utils.m */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		0E960F66189BA997009AD48C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0E0DE6671891110D000C6B65 /* SettingsControllers */,
+				0E0DE66B1891110D000C6B65 /* SidebarControllers */,
+				0E0DE6421891110D000C6B65 /* ProfileControllers */,
+				0E0DE63A1891110D000C6B65 /* MainController */,
+				0E0DE62F1891110D000C6B65 /* LoginControllers */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		0EBE722218962D8800572DE7 /* Models */ = {

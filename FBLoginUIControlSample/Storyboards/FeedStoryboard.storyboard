@@ -272,9 +272,21 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="jkv-4n-UBp">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <scopeButtonTitles>
+                                        <string>Title</string>
+                                        <string>Title</string>
+                                    </scopeButtonTitles>
+                                    <connections>
+                                        <outlet property="delegate" destination="Dwq-6a-9ai" id="jo6-7Q-yWs"/>
+                                    </connections>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FeedCell" rowHeight="125" id="6ki-I2-K0s" customClass="FeedCell">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="125"/>
+                                        <rect key="frame" x="0.0" y="66" width="320" height="125"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6ki-I2-K0s" id="Ofd-Tg-506">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="124"/>
@@ -337,9 +349,20 @@
                     </view>
                     <connections>
                         <outlet property="feedTableView" destination="yVh-gD-w8s" id="ybu-PP-cBh"/>
+                        <outlet property="searchBar" destination="jkv-4n-UBp" id="aNW-gU-fxu"/>
+                        <outlet property="searchDisplayController" destination="C1A-Zy-xx1" id="Moe-6f-dmp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MV8-A7-Hqc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="C1A-Zy-xx1">
+                    <connections>
+                        <outlet property="delegate" destination="Dwq-6a-9ai" id="JZe-pY-fWp"/>
+                        <outlet property="searchBar" destination="jkv-4n-UBp" id="WJH-fB-fVC"/>
+                        <outlet property="searchContentsController" destination="Dwq-6a-9ai" id="3Zc-R6-vuy"/>
+                        <outlet property="searchResultsDataSource" destination="Dwq-6a-9ai" id="vQH-4Q-wex"/>
+                        <outlet property="searchResultsDelegate" destination="Dwq-6a-9ai" id="xEl-Zr-YNo"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="626" y="1436"/>
         </scene>

@@ -12,5 +12,5 @@
 
 @property (nonatomic, weak) IBOutlet UITableView* feedTableView;
 
-
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @end

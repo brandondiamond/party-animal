@@ -13,7 +13,7 @@
 #import "Utils.h"
 
 @interface MainSideViewController ()
-
+@property (nonatomic, weak) UIViewController *mainController;
 @end
 
 @implementation MainSideViewController
@@ -34,29 +34,76 @@
     SidebarController1 *rearVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"SidebarController"];
 
     UIStoryboard* feedStoryboard = [UIStoryboard storyboardWithName:@"FeedStoryboard" bundle:nil];
-    UIViewController *frontVC = [feedStoryboard instantiateViewControllerWithIdentifier:@"FeedController"];
+    FeedController *frontVC = [feedStoryboard instantiateViewControllerWithIdentifier:@"FeedController"];
     
+
     frontVC.view.backgroundColor = [UIColor blackColor];
-
+    
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:frontVC];
-    
-    
-    [FlatTheme styleNavigationBarWithFontName:@"Avenir" andColor:[UIColor colorWithWhite:0.4f alpha:1.0f]];
-    
-    UIButton* menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 28, 20)];
-    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu.png"] forState:UIControlStateNormal];
-    [menuButton addTarget:self action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
 
+    NSString* boldFontName = @"Avenir-Black";
+    
+    [self styleNavigationBarWithFontName:boldFontName withNavItem:frontVC.navigationItem];
+    
+//    [FlatTheme styleNavigationBarWithFontName:@"Avenir" andColor:[UIColor colorWithWhite:0.4f alpha:1.0f]];
+    
+    self.mainController = frontVC;
 
-    frontVC.navigationItem.leftBarButtonItem = self.menuItem;
     rearVC.mainSideViewController = self;
     
     self.contentViewController = nav;
     self.sidebarViewController = rearVC;
 }
 
+
+-(void)styleNavigationBarWithFontName:(NSString*)navigationTitleFont withNavItem:(UINavigationItem*)navItem{
+    
+    
+    CGSize size = CGSizeMake(320, 44);
+    UIColor* color = [UIColor whiteColor];
+    
+    UIGraphicsBeginImageContext(size);
+    CGContextRef currentContext = UIGraphicsGetCurrentContext();
+    CGRect fillRect = CGRectMake(0,0,size.width,size.height);
+    CGContextSetFillColorWithColor(currentContext, color.CGColor);
+    CGContextFillRect(currentContext, fillRect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    
+    UINavigationBar* navAppearance = [UINavigationBar appearance];
+    
+    [navAppearance setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    
+    [navAppearance setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                           [UIColor colorWithRed:28.0/255 green:158.0/255 blue:121.0/255 alpha:1.0f], UITextAttributeTextColor,
+                                           [UIFont fontWithName:navigationTitleFont size:18.0f], UITextAttributeFont, [NSValue valueWithCGSize:CGSizeMake(0.0, 0.0)], UITextAttributeTextShadowOffset,
+                                           nil]];
+    UIImageView* searchView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"search.png"]];
+    searchView.frame = CGRectMake(0, 0, 20, 20);
+    
+    UITapGestureRecognizer *observeSearchView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleSearchTapped:)];
+    
+    [searchView addGestureRecognizer:observeSearchView];
+    
+    
+    UIBarButtonItem* searchItem = [[UIBarButtonItem alloc] initWithCustomView:searchView];
+    
+    navItem.rightBarButtonItem = searchItem;
+    
+    
+    UIImageView* menuView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menu.png"]];
+    menuView.frame = CGRectMake(0, 0, 28, 20);
+    
+    UIBarButtonItem* menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuView];
+    
+    UITapGestureRecognizer *observeMenu = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(revealToggle:)];
+    
+    [menuView addGestureRecognizer:observeMenu];
+
+    navItem.leftBarButtonItem = menuItem;
+}
 
 
 - (void)viewDidUnload {
@@ -76,6 +123,14 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+
+-(void)toggleSearchTapped:(UIGestureRecognizer*)gestureRecognizer {
+    if([self.mainController isKindOfClass:[FeedController class]]) {
+        FeedController *controller =(FeedController *)self.mainController;
+        controller.searchBar.hidden = !controller.searchBar.hidden;
+    }
+
+}
 
 - (void)revealToggle:(id)sender {
     //SidebarController1 *rearVC = (SidebarController1 *)self.sidebarViewController;

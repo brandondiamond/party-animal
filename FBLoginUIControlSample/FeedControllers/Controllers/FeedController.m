@@ -29,11 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-    NSString* boldFontName = @"Avenir-Black";
-    
-    [self styleNavigationBarWithFontName:boldFontName];
-    
+	   
     self.title = @"Feed";
     
     self.feedTableView.dataSource = self;
@@ -43,7 +39,7 @@
     self.feedTableView.separatorColor = [UIColor colorWithWhite:0.9 alpha:0.6];
     
     self.profileImages = [NSArray arrayWithObjects:@"profile.jpg", @"profile-1.jpg", @"profile-2.jpg", @"profile-3.jpg", nil];
-    
+    self.searchBar.hidden = YES;
 }
 
 // Customize the number of sections in the table view.
@@ -61,6 +57,10 @@
     
     FeedCell* cell = [tableView dequeueReusableCellWithIdentifier:@"FeedCell"];
     
+    if (!cell) {
+        cell = [[FeedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"FeedCell"];
+    }
+    
     cell.nameLabel.text = @"Kitty Pryde";
     cell.updateLabel.text = @"Sick foam party down in the east village. First 40 pay no cover.";
     
@@ -71,8 +71,9 @@
     NSString* profileImageName = self.profileImages[indexPath.row%self.profileImages.count];
     cell.profileImageView.image = [UIImage imageNamed:profileImageName];
     
-    return cell;
+        return cell;
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -80,46 +81,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)styleNavigationBarWithFontName:(NSString*)navigationTitleFont{
-    
-    
-    CGSize size = CGSizeMake(320, 44);
-    UIColor* color = [UIColor whiteColor];
-    
-    UIGraphicsBeginImageContext(size);
-    CGContextRef currentContext = UIGraphicsGetCurrentContext();
-    CGRect fillRect = CGRectMake(0,0,size.width,size.height);
-    CGContextSetFillColorWithColor(currentContext, color.CGColor);
-    CGContextFillRect(currentContext, fillRect);
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    
-    UINavigationBar* navAppearance = [UINavigationBar appearance];
-    
-    [navAppearance setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
-    
-    [navAppearance setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                           [UIColor colorWithRed:28.0/255 green:158.0/255 blue:121.0/255 alpha:1.0f], UITextAttributeTextColor,
-                                           [UIFont fontWithName:navigationTitleFont size:18.0f], UITextAttributeFont, [NSValue valueWithCGSize:CGSizeMake(0.0, 0.0)], UITextAttributeTextShadowOffset,
-                                           nil]];
-    UIImageView* searchView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"search.png"]];
-    searchView.frame = CGRectMake(0, 0, 20, 20);
-    
-    UIBarButtonItem* searchItem = [[UIBarButtonItem alloc] initWithCustomView:searchView];
-    
-    self.navigationItem.rightBarButtonItem = searchItem;
-    
-    
-    UIImageView* menuView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menu.png"]];
-    menuView.frame = CGRectMake(0, 0, 28, 20);
-    
-    UIBarButtonItem* menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuView];
-    
-    
-    self.navigationItem.leftBarButtonItem = menuItem;
-}
 
 
 

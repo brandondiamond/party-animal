@@ -114,7 +114,7 @@ const CGFloat kGHRevealSidebarFlickVelocity = 1000.0f;
 		_contentView.layer.shadowRadius = 2.5f;
 		_contentView.layer.shadowPath = [UIBezierPath bezierPathWithRect:_contentView.bounds].CGPath;
 		[self.view addSubview:_contentView];
-        
+    
     if (sidebarViewController) {
         UIViewController *temp = sidebarViewController;
         sidebarViewController = nil;

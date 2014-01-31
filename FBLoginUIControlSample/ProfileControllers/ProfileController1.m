@@ -5,7 +5,7 @@
 //  Created by Tope on 31/05/2013.
 //  Copyright (c) 2013 App Design Vault. All rights reserved.
 //
-
+#import "User.h"
 #import "ProfileController1.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -27,7 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+	User* current_user = [User currentUser];
     UIColor* mainColor = [UIColor colorWithRed:222.0/255 green:59.0/255 blue:47.0/255 alpha:1.0f];
     
     NSString* fontName = @"GillSans-Italic";
@@ -35,7 +35,7 @@
     self.title = @"Profile";
     self.nameLabel.textColor =  [UIColor whiteColor];
     self.nameLabel.font =  [UIFont fontWithName:boldFontName size:18.0f];
-    self.nameLabel.text = @"Maria Llewellyngot";
+    self.nameLabel.text = current_user.name;
     
     self.locationLabel.textColor =  [UIColor whiteColor];
     self.locationLabel.font =  [UIFont fontWithName:fontName size:14.0f];
@@ -99,7 +99,7 @@
     self.profileBgImageView.image = [UIImage imageNamed:@"wine-cork.jpg"];
     self.profileBgImageView.contentMode = UIViewContentModeScaleAspectFill;
     
-    self.profileImageView.image = [UIImage imageNamed:@"profile.jpg"];
+    self.profileImageView.image = current_user.profile_picture;
     self.profileImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.profileImageView.clipsToBounds = YES;
     self.profileImageView.layer.cornerRadius = 48.0f;

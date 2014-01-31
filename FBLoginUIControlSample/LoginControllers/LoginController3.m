@@ -25,8 +25,6 @@
     if (self) {
         // Custom initialization
         [FBLoginView class];
-        
-
     }
     return self;
 }
@@ -39,9 +37,7 @@
 // This method will be called when the user information has been fetched
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
                             user:(id<FBGraphUser>)user {
-    NSArray *arr= [[NSArray alloc]initWithObjects:user.first_name, user.middle_name, user.last_name, nil];
-    NSString *name = [arr componentsJoinedByString:@" "];
-    
+    NSString *name = [NSString stringWithFormat:@"%@ %@", user.first_name, user.last_name];
     [[User currentUser] setId:user.id name:name link:user.link username:user.username birthday:user.birthday location:user.location];
     NSLog(@"Initialized current user");
     
