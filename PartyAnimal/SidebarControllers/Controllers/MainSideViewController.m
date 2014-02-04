@@ -14,6 +14,7 @@
 
 @interface MainSideViewController ()
 @property (nonatomic, weak) UIViewController *mainController;
+@property (nonatomic, readwrite) BOOL *searchShowing;
 @end
 
 @implementation MainSideViewController
@@ -53,6 +54,7 @@
     
     self.contentViewController = nav;
     self.sidebarViewController = rearVC;
+    
 }
 
 
@@ -127,9 +129,14 @@
 -(void)toggleSearchTapped:(UIGestureRecognizer*)gestureRecognizer {
     if([self.mainController isKindOfClass:[FeedController class]]) {
         FeedController *controller =(FeedController *)self.mainController;
-        controller.searchBar.hidden = !controller.searchBar.hidden;
+        if(self.searchShowing) {
+            controller.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,44)];
+            [controller.view addSubview:controller.searchBar];
+        } else{
+            [controller.searchBar removeFromSuperview];
+        }
+        self.searchShowing = !self.searchShowing;
     }
-
 }
 
 - (void)revealToggle:(id)sender {

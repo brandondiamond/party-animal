@@ -37,6 +37,8 @@
     NSString* user_id = [[User currentUser] id];
     NSURL *prof_pic_url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", user_id]];
     NSData *data = [NSData dataWithContentsOfURL:prof_pic_url];
+    if(!data)
+      return [UIImage imageNamed:@"profile.jpg"];
     return [[UIImage alloc] initWithData:data];
 }
 

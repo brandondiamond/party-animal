@@ -9,7 +9,6 @@
 #import <FacebookSDK/FacebookSDK.h>
 
 #import "AppDelegate.h"
-#import "LoginUIViewController.h"
 
 @implementation AppDelegate
 

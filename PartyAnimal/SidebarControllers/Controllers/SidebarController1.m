@@ -64,7 +64,7 @@
     self.logoutLink.font = [UIFont fontWithName:fontName size:12.0f];
   
     
-    self.profileImageView.image = self.current_user.profile_picture;
+    self.profileImageView.image = [self.current_user profile_picture];
     
     self.profileImageView.clipsToBounds = YES;
     self.profileImageView.layer.borderWidth = 2.0f;
@@ -81,7 +81,7 @@
     NSDictionary* object5 = [NSDictionary dictionaryWithObjects:@[ @"Settings", @"0", @"settings"] forKeys:@[ @"title", @"count", @"icon"]];
     
     self.items = @[object1, object2, object3, object4, object5];
-	
+
 }
 
 -(void)setRoundedView:(UIImageView *)roundedView toDiameter:(float)newSize;
