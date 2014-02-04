@@ -19,7 +19,7 @@ PODS:
     - AFNetworking/NSURLConnection
   - Facebook-iOS-SDK (3.11.1)
   - JSONKit (1.5pre)
-  - Reachability (3.0.0)
+  - Reachability (3.1.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
@@ -31,6 +31,6 @@ SPEC CHECKSUMS:
   AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
   Facebook-iOS-SDK: 42a1de39170b858d675c2453d8aace55c51be2bb
   JSONKit: 409734ab3407fce90ef7eaa95d7168f38d9a6601
-  Reachability: 500bd76bf6cd8ff2c6fb715fc5f44ef6e4c024f2
+  Reachability: be4883bb93f31e38266ae3365e5600a317aae735
 
 COCOAPODS: 0.29.0

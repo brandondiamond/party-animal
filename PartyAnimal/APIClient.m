@@ -19,8 +19,9 @@
     
     @synchronized(self)
     {
-        if (!sharedClient)
-            AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:BASE_URL];
+        if (!sharedClient){
+            AFHTTPRequestOperationManager *sharedClient = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:BASE_URL]];
+        }
         return sharedClient;
     }
 }

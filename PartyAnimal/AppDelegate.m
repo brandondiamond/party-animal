@@ -8,6 +8,7 @@
 
 #import <FacebookSDK/FacebookSDK.h>
 
+#import "APIClient.h"
 #import "AppDelegate.h"
 
 @implementation AppDelegate
@@ -15,6 +16,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    APIClient *client = [APIClient sharedClient];
+    
     // Override point for customization after application launch.
   
     // Load the FBProfilePictureView

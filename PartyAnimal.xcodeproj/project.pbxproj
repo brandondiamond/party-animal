@@ -76,8 +76,6 @@
 		0E8DCC001894A5B5000C52CA /* FeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DCBFF1894A5B5000C52CA /* FeedController.m */; };
 		0E8DCC031894A5DF000C52CA /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DCC021894A5DF000C52CA /* FeedCell.m */; };
 		0E960F6918A0D2A2009AD48C /* APIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E960F6818A0D2A2009AD48C /* APIClient.m */; };
-		0E960F6C18A0D380009AD48C /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E960F6B18A0D380009AD48C /* Constants.m */; };
-		0E960F6E18A0D4F2009AD48C /* Constants.m in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E960F6B18A0D380009AD48C /* Constants.m */; };
 		0EBE722518962DA400572DE7 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE722418962DA400572DE7 /* User.m */; };
 		E77236E7922F41B8AF295E24 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356E6ADDE0E438281CFEBBF /* libPods.a */; };
 		ED4B39CD17E91A080007F5BE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED4B39CC17E91A080007F5BE /* Foundation.framework */; };
@@ -195,7 +193,6 @@
 		0E960F6718A0D2A2009AD48C /* APIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIClient.h; sourceTree = "<group>"; };
 		0E960F6818A0D2A2009AD48C /* APIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIClient.m; sourceTree = "<group>"; };
 		0E960F6A18A0D300009AD48C /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		0E960F6B18A0D380009AD48C /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		0EBE722318962DA400572DE7 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		0EBE722418962DA400572DE7 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		6AB5449440F24E0A87B0B39D /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -215,7 +212,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E960F6E18A0D4F2009AD48C /* Constants.m in Frameworks */,
 				ED4B39CF17E91A080007F5BE /* CoreGraphics.framework in Frameworks */,
 				ED4B39D117E91A080007F5BE /* UIKit.framework in Frameworks */,
 				ED4B39CD17E91A080007F5BE /* Foundation.framework in Frameworks */,
@@ -478,7 +474,6 @@
 		0E0DE67A1891110D000C6B65 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				0E960F6B18A0D380009AD48C /* Constants.m */,
 				0E960F6A18A0D300009AD48C /* Constants.h */,
 				0E0DE67B1891110D000C6B65 /* ControllerInfo.h */,
 				0E0DE67C1891110D000C6B65 /* ControllerInfo.m */,
@@ -747,7 +742,6 @@
 				0E0DE6BF1891110D000C6B65 /* MainSideViewController.m in Sources */,
 				0E8DCC001894A5B5000C52CA /* FeedController.m in Sources */,
 				0E0DE6C91891110D000C6B65 /* Utils.m in Sources */,
-				0E960F6C18A0D380009AD48C /* Constants.m in Sources */,
 				0E0DE6BE1891110D000C6B65 /* SidebarCell1.m in Sources */,
 				0E0DE6921891110D000C6B65 /* BaseLoginController.m in Sources */,
 				0E0DE6C71891110D000C6B65 /* FlatTheme.m in Sources */,
