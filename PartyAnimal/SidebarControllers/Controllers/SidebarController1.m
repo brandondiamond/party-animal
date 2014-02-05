@@ -160,6 +160,8 @@
     
     [(UINavigationController*)self.mainSideViewController.contentViewController setViewControllers:[NSArray arrayWithObject:profileVC] animated:YES];
     
+    [self.mainSideViewController styleNavigationBarWithFontName:@"Avenir-Black" withNavItem:profileVC.navigationItem];
+
     [self.mainSideViewController toggleSidebar:!self.mainSideViewController.sidebarShowing duration:kGHRevealSidebarDefaultAnimationDuration];
 }
 
@@ -168,12 +170,14 @@
     NSLog(@"view feed");
     UIStoryboard* feedStoryboard = [UIStoryboard storyboardWithName:@"FeedStoryboard" bundle:nil];
     UIViewController *feedVC = [feedStoryboard instantiateViewControllerWithIdentifier:@"FeedController"];
-    
+
+
     feedVC.view.backgroundColor = [UIColor blackColor];
     feedVC.navigationItem.leftBarButtonItem = self.mainSideViewController.menuItem;
     
     [(UINavigationController*)self.mainSideViewController.contentViewController setViewControllers:[NSArray arrayWithObject:feedVC] animated:YES];
     
+    [self.mainSideViewController styleNavigationBarWithFontName:@"Avenir-Black" withNavItem:feedVC.navigationItem];
     [self.mainSideViewController toggleSidebar:!self.mainSideViewController.sidebarShowing duration:kGHRevealSidebarDefaultAnimationDuration];
 
 }
@@ -187,7 +191,9 @@
         
     profileVC.navigationItem.leftBarButtonItem = self.mainSideViewController.menuItem;
     
+    
     [(UINavigationController*)self.mainSideViewController.contentViewController setViewControllers:[NSArray arrayWithObject:profileVC] animated:YES];
+    [self.mainSideViewController styleNavigationBarWithFontName:@"Avenir-Black" withNavItem:profileVC.navigationItem];
     
     [self.mainSideViewController toggleSidebar:!self.mainSideViewController.sidebarShowing duration:kGHRevealSidebarDefaultAnimationDuration];
 }

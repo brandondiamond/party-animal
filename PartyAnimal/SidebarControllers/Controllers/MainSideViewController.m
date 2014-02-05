@@ -57,57 +57,6 @@
     
 }
 
-
--(void)styleNavigationBarWithFontName:(NSString*)navigationTitleFont withNavItem:(UINavigationItem*)navItem{
-    
-    
-    CGSize size = CGSizeMake(320, 44);
-    UIColor* color = [UIColor whiteColor];
-    
-    UIGraphicsBeginImageContext(size);
-    CGContextRef currentContext = UIGraphicsGetCurrentContext();
-    CGRect fillRect = CGRectMake(0,0,size.width,size.height);
-    CGContextSetFillColorWithColor(currentContext, color.CGColor);
-    CGContextFillRect(currentContext, fillRect);
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    
-    UINavigationBar* navAppearance = [UINavigationBar appearance];
-    
-    [navAppearance setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
-    
-    [navAppearance setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                           [UIColor colorWithRed:28.0/255 green:158.0/255 blue:121.0/255 alpha:1.0f], UITextAttributeTextColor,
-                                           [UIFont fontWithName:navigationTitleFont size:18.0f], UITextAttributeFont, [NSValue valueWithCGSize:CGSizeMake(0.0, 0.0)], UITextAttributeTextShadowOffset,
-                                           nil]];
-    UIImageView* searchView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"search.png"]];
-    searchView.frame = CGRectMake(0, 0, 20, 20);
-    
-    UITapGestureRecognizer *observeSearchView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleSearchTapped:)];
-    
-    [searchView addGestureRecognizer:observeSearchView];
-    
-    
-    UIBarButtonItem* searchItem = [[UIBarButtonItem alloc] initWithCustomView:searchView];
-    
-    navItem.rightBarButtonItem = searchItem;
-    
-    
-    UIImageView* menuView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menu.png"]];
-    menuView.frame = CGRectMake(0, 0, 28, 20);
-    
-    UIBarButtonItem* menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuView];
-    
-    UITapGestureRecognizer *observeMenu = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(revealToggle:)];
-    
-    [menuView addGestureRecognizer:observeMenu];
-
-    navItem.leftBarButtonItem = menuItem;
-}
-
-
 - (void)viewDidUnload {
     [super viewDidUnload];
 }

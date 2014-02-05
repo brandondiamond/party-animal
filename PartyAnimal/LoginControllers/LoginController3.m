@@ -9,6 +9,7 @@
 #import "User.h"
 #import "LoginController3.h"
 #import "MainSideViewController.h"
+#import "SVProgressHUD.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface LoginController3 ()
@@ -41,9 +42,11 @@
     [[User currentUser] setId:user.id name:name link:user.link username:user.username birthday:user.birthday location:user.location];
     NSLog(@"Initialized current user");
     
+    [SVProgressHUD show];
     NSLog(@"Transitioning to sidebar storyboard.");
     [self performSegueWithIdentifier:@"SidebarSegue" sender:self];
-    
+    [SVProgressHUD dismiss];
+
 }
 
 

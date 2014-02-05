@@ -28,4 +28,5 @@ extern const CGFloat kGHRevealSidebarWidth;
 - (void)toggleSearch:(BOOL)showSearch withSearchView:(UIView *)searchView duration:(NSTimeInterval)duration;
 - (void)toggleSearch:(BOOL)showSearch withSearchView:(UIView *)searchView duration:(NSTimeInterval)duration completion:(void (^)(BOOL finished))completion;
 
+-(void)styleNavigationBarWithFontName:(NSString*)navigationTitleFont withNavItem:(UINavigationItem*)navItem;
 @end
